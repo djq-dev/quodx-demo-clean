@@ -88,7 +88,7 @@ export default function ExportPack() {
             <strong>AI Tools:</strong> Human Loop, Remix Engine, Motif Distiller
           </li>
           <li>
-            <strong>Stems:</strong> Drums + Keys (with previews)
+            <strong>Stems:</strong> 🎵 Drums + 🎹 Keys
           </li>
           <li>
             <strong>Remix Logic:</strong> Pitch shift{" "}
