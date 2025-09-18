@@ -68,8 +68,8 @@ export default function ExportPack() {
       <header>
         <h1>Signature Pack</h1>
         <p>
-          A personalized creative bundle generated from your input — ready to
-          remix, share, and explore.
+          Your creative flow bundled — ready to
+          remix, share, and explore with your fans.
         </p>
       </header>
 
@@ -78,7 +78,7 @@ export default function ExportPack() {
         <ul style={{ lineHeight: "1.8", marginTop: "12px" }}>
           <li>
             <strong>Prompts:</strong>{" "}
-            {ritual?.prompt || "Captured from your words on page 1"}
+            {ritual?.prompt || "Your senses documented"}
           </li>
           <li>
             <strong>Instructions:</strong> Load stems in DAW, tempo{" "}
