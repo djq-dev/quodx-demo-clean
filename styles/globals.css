@@ -1,125 +1,121 @@
-/* =========================
-   Global Reset + Base Styles
-   ========================= */
-body {
+/* Base reset */
+html, body {
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background: #0d0d0f;
-  color: #eee;
-  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: #fdfdfd;
+  color: #222;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+/* Container */
 .container {
-  max-width: 800px;
+  max-width: 720px;
   margin: 0 auto;
   padding: 24px;
 }
 
-header {
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-h2 {
-  font-size: 1.3rem;
-  margin-bottom: 0.75rem;
-}
-
 /* Panels */
 .panel {
-  background: #1a1a22;
-  border: 1px solid #333;
+  background: #fff;
   border-radius: 12px;
   padding: 20px;
-  margin-bottom: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Rows */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 /* Buttons */
-button,
-.button {
-  background: #4b6ef5;
+button, .button {
+  background: #4a4af4;
   color: white;
   border: none;
   border-radius: 8px;
   padding: 10px 16px;
-  font-size: 0.95rem;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  font-weight: 500;
   text-decoration: none;
   display: inline-block;
+  transition: transform 0.15s ease, background 0.3s ease;
 }
 
-button:hover,
-.button:hover {
-  background: #3652c8;
+button:hover, .button:hover {
   transform: translateY(-2px);
+  background: #3737d4;
 }
 
-button.secondary,
-.button.secondary {
-  background: #333;
-  color: #ddd;
+button.secondary {
+  background: #e5e5e5;
+  color: #333;
 }
 
-button.secondary:hover,
-.button.secondary:hover {
-  background: #444;
+button.secondary:hover {
+  background: #d5d5d5;
 }
 
-/* Row layout */
-.row {
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
   display: flex;
-  gap: 12px;
   align-items: center;
+  justify-content: center;
 }
 
-/* =========================
-   Export Page – Scoped Styles
-   ========================= */
-.export-page header h1 {
-  font-size: 2rem;
-  color: #fff;
-}
-
-.export-page .pack-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.export-page .pack-card {
-  background: #1e1e2f;
-  border: 1px solid #333;
+.modal-content {
+  background: #fff;
+  padding: 24px;
   border-radius: 12px;
-  padding: 16px;
-  color: #eee;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out;
+  max-width: 600px;
+  width: 100%;
 }
 
-.export-page .pack-card:hover {
-  transform: translateY(-3px);
+/* Export page specific */
+.export-page header {
+  text-align: center;
+  margin-bottom: 24px;
 }
 
-.export-page .pack-card h3 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
+.export-page h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
 }
 
-.export-page .pack-card ul {
-  padding-left: 20px;
-  margin: 0;
+.export-page p {
+  color: #555;
 }
 
-.export-page .pack-card li {
-  margin-bottom: 6px;
-  font-size: 0.9rem;
+.export-page ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.export-page li {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.export-page li strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #222;
 }
