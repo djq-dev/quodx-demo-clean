@@ -57,14 +57,14 @@ export default function ExportPack() {
 
   if (!pack) {
     return (
-      <div className="container">
+      <div className="container export-page">
         <p>Loading pack...</p>
       </div>
     );
   }
 
   return (
-    <div className="container">
+    <div className="container export-page">
       <header>
         <h1>Signature Pack</h1>
         <p>
