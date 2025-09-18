@@ -57,31 +57,31 @@ export default function ExportPack() {
 
   if (!pack) {
     return (
-      <div className="container export-page">
+      <div className="container">
         <p>Loading pack...</p>
       </div>
     );
   }
 
   return (
-    <div className="container export-page">
+    <div className="container">
       <header>
         <h1>Signature Pack</h1>
         <p>
-          A personalized creative bundle generated from your input — ready to
-          remix, share, and explore.
+          Your personalized creative bundle, generated from your input —
+          ready to remix, share, and explore.
         </p>
       </header>
 
       <section className="panel">
         <h2>📦 What’s Inside</h2>
-        <ul style={{ lineHeight: "1.8", marginTop: "12px" }}>
+        <ul className="pack-summary">
           <li>
             <strong>Prompts:</strong>{" "}
-            {ritual?.prompt || "Captured from your words on page 1"}
+            {ritual?.prompt || "Captured from your words"}
           </li>
           <li>
-            <strong>Instructions:</strong> Load stems in DAW, tempo{" "}
+            <strong>Instructions:</strong> Load stems in DAW — tempo{" "}
             {remix?.tempo_bpm ?? 95} BPM
           </li>
           <li>
