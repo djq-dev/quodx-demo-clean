@@ -1,137 +1,147 @@
-/* Base reset */
-html, body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background: #111; /* DARK background back */
-  color: #f5f5f5;   /* Light text for contrast */
-}
+import { useEffect, useState } from "react";
 
-* {
-  box-sizing: border-box;
-}
+export default function ExportPack() {
+  const [ritual, setRitual] = useState(null);
+  const [remix, setRemix] = useState(null);
+  const [pack, setPack] = useState(null);
+  const [showDaw, setShowDaw] = useState(false);
 
-/* Container */
-.container {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 24px;
-}
+  useEffect(() => {
+    const r =
+      typeof window !== "undefined"
+        ? localStorage.getItem("quodx.ritual")
+        : null;
+    const m =
+      typeof window !== "undefined"
+        ? localStorage.getItem("quodx.remix")
+        : null;
+    const ritualObj = r ? JSON.parse(r) : null;
+    const remixObj = m ? JSON.parse(m) : null;
+    setRitual(ritualObj);
+    setRemix(remixObj);
 
-/* Panels */
-.panel {
-  background: #1c1c1c;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 20px 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  color: #f5f5f5;
-}
+    const packObj = {
+      pack_id: "pack_" + Math.random().toString(36).slice(2, 10),
+      pack_name: "QuodX Spaces — Signature Pack Demo",
+      version: "1.0-demo",
+      created_at: new Date().toISOString(),
+      ritual: ritualObj || {},
+      remix: remixObj || {},
+      stems: {
+        drums: "/assets/drums.wav",
+        keys: "/assets/keys.wav",
+      },
+      licensing: {
+        license: "Demo / Non-commercial",
+        attribution_embedded: true,
+        lineage_id: "demo-lineage-0001",
+      },
+    };
+    setPack(packObj);
+  }, []);
 
-/* Rows */
-.row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+  function copy() {
+    navigator.clipboard.writeText(JSON.stringify(pack, null, 2));
+    alert("Copied JSON");
+  }
 
-/* Buttons */
-button, .button {
-  background: #4a4af4;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 16px;
-  cursor: pointer;
-  font-weight: 500;
-  text-decoration: none;
-  display: inline-block;
-  transition: transform 0.15s ease, background 0.3s ease;
-}
+  function download() {
+    const blob = new Blob([JSON.stringify(pack, null, 2)], {
+      type: "application/json",
+    });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "signature-pack.json";
+    a.click();
+  }
 
-button:hover, .button:hover {
-  transform: translateY(-2px);
-  background: #3737d4;
-}
+  if (!pack) {
+    return (
+      <div className="container export-page">
+        <p>Loading pack...</p>
+      </div>
+    );
+  }
 
-button.secondary {
-  background: #e5e5e5;
-  color: #333;
-}
+  return (
+    <div className="container export-page">
+      <header>
+        <h1>Signature Pack</h1>
+        <p>
+          A personalized creative bundle generated from your input — ready to
+          remix, share, and explore.
+        </p>
+      </header>
 
-button.secondary:hover {
-  background: #d5d5d5;
-}
+      <section className="panel">
+        <h2>📦 What’s Inside</h2>
+        <ul style={{ lineHeight: "1.8", marginTop: "12px" }}>
+          <li>
+            <strong>Prompts:</strong>{" "}
+            {ritual?.prompt || "Captured from your words on page 1"}
+          </li>
+          <li>
+            <strong>Instructions:</strong> Load stems in DAW, tempo{" "}
+            {remix?.tempo_bpm ?? 95} BPM
+          </li>
+          <li>
+            <strong>AI Tools:</strong> Human Loop, Remix Engine, Motif Distiller
+          </li>
+          <li>
+            <strong>Stems:</strong> 🎵 Drums + 🎹 Keys
+          </li>
+          <li>
+            <strong>Remix Logic:</strong> Pitch shift{" "}
+            {remix?.pitch_semitones ?? 0}, active modules{" "}
+            {remix?.modules
+              ? Object.keys(remix.modules).join(", ")
+              : "N/A"}
+          </li>
+          <li>
+            <strong>License:</strong>{" "}
+            {pack?.licensing?.license || "Demo / Non-commercial"}
+          </li>
+        </ul>
 
-/* Modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+        <div className="row" style={{ marginTop: 20, gap: 12 }}>
+          <button onClick={copy}>📋 Copy JSON</button>
+          <button onClick={download}>⬇️ Download JSON</button>
+          <button onClick={() => setShowDaw(true)}>🎚️ Export to DAW (mock)</button>
+        </div>
+      </section>
 
-.modal-content {
-  background: #fff;
-  padding: 24px;
-  border-radius: 12px;
-  max-width: 600px;
-  width: 100%;
-  color: #222;
-}
-
-/* ===== Export page ONLY ===== */
-.export-page {
-  background: #fdfdfd; /* Light background just for export */
-  color: #222;
-  min-height: 100vh;
-  padding: 24px;
-}
-
-.export-page .panel {
-  background: #fff;
-  color: #222;
-  border: 1px solid #eee;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-
-.export-page header {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.export-page h1 {
-  font-size: 2rem;
-  margin-bottom: 8px;
-}
-
-.export-page p {
-  color: #555;
-}
-
-.export-page ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.export-page li {
-  background: #fafafa;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 10px;
-  font-size: 1rem;
-}
-
-.export-page li strong {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 4px;
-  color: #222;
+      {showDaw && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>DAW Plugin (Mock)</h2>
+            <p>This is how the pack could load into a DAW.</p>
+            <img
+              src="/assets/daw-mock.png"
+              alt="daw mock"
+              style={{
+                width: "100%",
+                border: "1px solid #444",
+                borderRadius: 8,
+              }}
+            />
+            <div className="row" style={{ marginTop: 12 }}>
+              <a
+                className="button"
+                href="/assets/quodx-demo.vst3"
+                download
+              >
+                Download Plugin (mock)
+              </a>
+              <button
+                className="secondary"
+                onClick={() => setShowDaw(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
