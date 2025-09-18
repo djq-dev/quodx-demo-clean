@@ -99,38 +99,26 @@ button.secondary:hover {
   color: #555;
 }
 
-.export-page ul {
-  list-style: none;
-  padding-left: 0;
+/* Pack summary */
+.pack-summary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 16px;
 }
 
-.export-page li {
+.pack-summary li {
   background: #fafafa;
   border: 1px solid #eee;
   border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 10px;
+  padding: 14px;
   font-size: 1rem;
+  line-height: 1.4;
 }
 
-.export-page li strong {
+.pack-summary li strong {
   display: block;
   font-weight: 600;
   margin-bottom: 4px;
   color: #222;
-}
-
-/* Signature Pack Summary */
-.pack-summary {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.pack-summary li {
-  background: #f9f9fb;
-  margin: 6px 0;
-  padding: 10px 14px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
